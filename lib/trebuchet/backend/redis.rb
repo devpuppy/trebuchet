@@ -8,8 +8,12 @@ class Trebuchet::Backend::Redis
   end
 
   def get_strategy(feature_name)
-    s = @redis.hget(key, feature_name)
-    s ? JSON.load(s) : nil
+    if s = @redis.hget(key, feature_name)
+      s = JSON.load(s)
+      s.map! {|e| e && s.index(e).even? ? e.to_sym : e} # set strategy names to symbols
+    else
+      nil
+    end
   end
 
   def set_strategy(feature_name, strategy, options = nil)

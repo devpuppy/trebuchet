@@ -8,6 +8,10 @@ class Trebuchet::Strategy::Multiple
       @strategies << Trebuchet::Strategy.find(*pair)
     end
   end
+  
+  def name
+    :multiple
+  end
 
   def launch_at?(user)
     strategies.find { |s| s.launch_at?(user) }

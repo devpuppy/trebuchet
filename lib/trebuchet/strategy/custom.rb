@@ -1,13 +1,17 @@
 class Trebuchet::Strategy::Custom
 
-  attr_reader :options
+  attr_reader :options, :custom_name
 
   @@custom_strategies = {}
 
   def initialize(name, options = nil)
-    @name = name
+    @custom_name = name
     @options = options
     @block = @@custom_strategies[name]
+  end
+  
+  def name
+    :custom
   end
 
   def launch_at?(user)

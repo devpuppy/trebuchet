@@ -5,6 +5,10 @@ class Trebuchet::Strategy::Percentage
   def initialize(percentage)
     @percentage = percentage
   end
+  
+  def name
+    :percent
+  end
 
   def launch_at?(user)
     user.id % 100 < percentage

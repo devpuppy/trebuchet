@@ -3,9 +3,12 @@ class TrebuchetController < ::ApplicationController
   def index
     @features = {}
     Trebuchet.backend.get_features.each do |f|
-      @features[f] = Trebuchet.backend.get_strategy(f)
+      begin
+        @features[f] = Trebuchet::Strategy.for_feature(Trebuchet::Feature.find(f.to_sym))
+      rescue ArgumentError
+        @features[f] = Trebuchet::Strategy::Default.new
+      end
     end
-    # raise @features.inspect
   end
   
 end

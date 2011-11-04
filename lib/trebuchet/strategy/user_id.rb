@@ -5,9 +5,13 @@ class Trebuchet::Strategy::UserId
   def initialize(user_ids)
     @user_ids = Set.new(user_ids)
   end
+  
+  def name
+    :users
+  end
 
   def launch_at?(user)
     @user_ids.include?(user.id)
   end
-
+  
 end
