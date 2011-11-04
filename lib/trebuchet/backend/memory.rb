@@ -15,5 +15,9 @@ class Trebuchet::Backend::Memory
   def append_strategy(feature, strategy, options = nil)
     @hash.store(feature, get_strategy(feature) + [strategy, options])
   end
+  
+  def get_features
+    @hash.keys
+  end
 
 end
