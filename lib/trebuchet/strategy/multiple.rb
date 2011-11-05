@@ -1,4 +1,4 @@
-class Trebuchet::Strategy::Multiple
+class Trebuchet::Strategy::Multiple < Trebuchet::Strategy::Base
 
   attr_reader :strategies
 
@@ -7,10 +7,6 @@ class Trebuchet::Strategy::Multiple
     args.each_slice(2) do |pair|
       @strategies << Trebuchet::Strategy.find(*pair)
     end
-  end
-  
-  def name
-    :multiple
   end
 
   def launch_at?(user)

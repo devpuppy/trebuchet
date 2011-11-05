@@ -1,5 +1,5 @@
 # Default is to not launch the feature to anyone
-class Trebuchet::Strategy::Default
+class Trebuchet::Strategy::Default < Trebuchet::Strategy::Base
 
   def name
     :default

@@ -1,17 +1,20 @@
-class Trebuchet::Strategy::Percentage
+require 'digest/md5'
 
-  attr_reader :percentage
+class Trebuchet::Strategy::Percentage < Trebuchet::Strategy::Base
+
+  attr_reader :percentage, :offset
 
   def initialize(percentage)
     @percentage = percentage
-  end
-  
-  def name
-    :percent
+    @offset = 0
+    if feature
+      # arbitrary yet deterministic offset based on feature name to vary the test groups
+      @offset = Digest::MD5.hexdigest(feature.name).to_i(16) % 100
+    end
   end
 
   def launch_at?(user)
-    user.id % 100 < percentage
+    (user.id + @offset) % 100 < percentage
   end
 
 end

@@ -16,5 +16,13 @@ describe Trebuchet::Strategy::Percentage do
     Trebuchet.aim('percentage', :percent, 4)
     should_launch('percentage', [0, 1, 2, 3])
   end
+  
+  it "should create an offset based on the feature name" do
+    Trebuchet.aim('percentage', :percent, 1)
+    offset = Trebuchet.feature('percentage').strategy.offset
+    offset.should != 0
+    should_launch('percentage', [0+offset])
+    should_not_launch('percentage', [offset - 1, offset + 1])
+  end
 
 end
