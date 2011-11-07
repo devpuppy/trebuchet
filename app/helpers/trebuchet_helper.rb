@@ -36,7 +36,7 @@ module TrebuchetHelper
   end
   
   def custom_strategy(strategy)
-    "#{strategy.custom_name} (custom strategy) #{strategy.options.inspect if strategy.options}"
+    "#{strategy.custom_name} (custom) #{strategy.options.inspect if strategy.options}"
   end
   
   def trebuchet_css
