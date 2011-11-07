@@ -39,4 +39,9 @@ module TrebuchetHelper
     "#{strategy.custom_name} (custom strategy) #{strategy.options.inspect if strategy.options}"
   end
   
+  def trebuchet_css
+    filename = File.expand_path(File.dirname(__FILE__) + "/../views/trebuchet/trebuchet.css")
+    return IO.read(filename)
+  end
+  
 end
