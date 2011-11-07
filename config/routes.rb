@@ -1,7 +1,7 @@
 if Rails::VERSION::STRING =~ /\A2\./
 
   ActionController::Routing::Routes.draw do |map|
-    map.trebuchet '/trebuchet', :controller => 'trebuchet'
+    map.trebuchet '/trebuchet.:format', :controller => 'trebuchet'
   end
 
 else

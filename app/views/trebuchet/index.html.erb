@@ -1,8 +1,8 @@
 <h1>Trebuchet Admin</h1>
 
 <dl>
-<% @features.each do |feature_name, strategy| %>
-	<dd><%= feature_name %></dd>
-	<dt><%= strategy strategy %></dt>
+<% @features.each do |feature| %>
+	<dd><%= feature.name %></dd>
+	<dt><%= strategy feature.strategy %></dt>
 <% end %>
 </dl>

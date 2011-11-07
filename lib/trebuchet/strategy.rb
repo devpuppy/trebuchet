@@ -2,9 +2,7 @@ module Trebuchet::Strategy
 
   def self.for_feature(feature)
     strategy_args = Trebuchet.backend.get_strategy(feature.name)
-    strategy = find(*strategy_args) #.tap {|s| s.feature = feature }
-    strategy.feature = feature
-    return strategy
+    find(*strategy_args).tap {|s| s.feature = feature }
   end
 
   def self.find(*args)

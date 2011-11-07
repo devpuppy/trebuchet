@@ -1,13 +1,12 @@
 class TrebuchetController < ::ApplicationController
 
   def index
-    @features = {}
-    Trebuchet.backend.get_features.each do |f|
-      begin
-        @features[f] = Trebuchet::Strategy.for_feature(Trebuchet::Feature.find(f.to_sym))
-      rescue ArgumentError
-        @features[f] = Trebuchet::Strategy::Default.new
-      end
+    @features = Trebuchet::Feature.all
+    @features.reject! {|f| f.valid? == false}
+    
+    respond_to do |wants|
+      wants.html # index.html.erb
+      wants.json { render :json => @features }
     end
   end
   

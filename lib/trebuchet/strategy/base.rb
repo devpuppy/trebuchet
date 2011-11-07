@@ -10,4 +10,14 @@ class Trebuchet::Strategy::Base
     Trebuchet::Strategy.name_for_class(self)
   end
   
+  def as_json(options = {})
+    excluded = [:feature, :block]
+    {:name => name}.tap do |h|
+      instance_variables.map do |v|
+        key = v.gsub('@','').to_sym
+        h[key] = instance_variable_get(v) unless excluded.include?(key)
+      end
+    end
+  end
+  
 end
