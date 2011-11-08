@@ -23,7 +23,6 @@ module Trebuchet::Strategy
     #   UserId.new(options)
     else
       Invalid.new(strategy_name, options)
-      # raise ArgumentError.new("Unsupported strategy: #{strategy_name}")
     end
   end
   
