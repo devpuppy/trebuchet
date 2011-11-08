@@ -16,11 +16,8 @@ module Trebuchet::Strategy
     elsif Custom.exists?(strategy_name)
       Custom.new(strategy_name, options)
     elsif klass = class_for_name(strategy_name)
+      # percent, users
       klass.new(options)
-    # elsif strategy_name == :percent
-    #   Percentage.new(options)
-    # elsif strategy_name == :users
-    #   UserId.new(options)
     else
       Invalid.new(strategy_name, options)
     end
