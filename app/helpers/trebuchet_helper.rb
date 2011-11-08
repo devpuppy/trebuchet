@@ -10,7 +10,12 @@ module TrebuchetHelper
     when nil
       default_strategy(strategy)
     else
-      send(:"#{strategy.name}_strategy", strategy)
+      method = :"#{strategy.name}_strategy"
+      if respond_to?(method)
+        send(method, strategy)
+      else
+        unsupported_strategy(strategy)
+      end
     end
     strategy.name == :multiple ? html : "<li>#{html}</li>"
   end
@@ -37,6 +42,14 @@ module TrebuchetHelper
   
   def custom_strategy(strategy)
     "#{strategy.custom_name} (custom) #{strategy.options.inspect if strategy.options}"
+  end
+  
+  def invalid_strategy(strategy)
+    "#{strategy.invalid_name} (invalid) #{strategy.options.inspect if strategy.options}"
+  end
+  
+  def unsupported_strategy(strategy)
+    "#{strategy.name} (unsupported)"
   end
   
   def trebuchet_css

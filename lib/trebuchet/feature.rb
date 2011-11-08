@@ -19,11 +19,7 @@ class Trebuchet::Feature
   end
   
   def valid?
-    begin
-      !!Trebuchet::Strategy.for_feature(self)
-    rescue ArgumentError
-      return false
-    end
+    strategy.name != :invalid
   end
 
   def launch_at?(user)
@@ -41,9 +37,10 @@ class Trebuchet::Feature
   end
   
   def as_json(options = {})
-    {:name => @name}.tap do |h|
-      h[:strategy] = strategy if valid?
-    end
+    {:name => @name, :strategy => strategy}
+    # .tap do |h|
+    #       h[:strategy] = strategy if valid?
+    #     end
   end
 
   private
