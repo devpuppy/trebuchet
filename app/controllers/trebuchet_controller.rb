@@ -1,4 +1,4 @@
-class TrebuchetController < ::ApplicationController
+class TrebuchetController < ApplicationController
 
   def index
     @features = Trebuchet::Feature.all
