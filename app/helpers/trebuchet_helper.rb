@@ -17,7 +17,14 @@ module TrebuchetHelper
         unsupported_strategy(strategy)
       end
     end
-    strategy.name == :multiple ? html : "<li>#{html}</li>"
+    
+    # return html.to_s
+    # return strategy.inspect
+    html = if (strategy.name == :multiple)
+      html
+    else
+      "<li>#{html.to_s}</li>".html_safe 
+    end
   end
   
   def users_strategy(strategy)
