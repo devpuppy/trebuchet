@@ -17,13 +17,10 @@ module TrebuchetHelper
         unsupported_strategy(strategy)
       end
     end
-    
-    # return html.to_s
-    # return strategy.inspect
     html = if (strategy.name == :multiple)
-      html
+      html.join('').html_safe # used recursively, so don't wrap outer with <li>
     else
-      "<li>#{html.to_s}</li>".html_safe 
+      content_tag(:li, html)
     end
   end
   
