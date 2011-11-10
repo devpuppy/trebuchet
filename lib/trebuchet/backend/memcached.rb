@@ -21,7 +21,7 @@ class Trebuchet::Backend::Memcached
     @memcache.set(key(feature), get_strategy(feature) + [strategy, options])
   end
   
-  def get_features
+  def get_feature_names
     [] # TODO: store all key names
   end
 
