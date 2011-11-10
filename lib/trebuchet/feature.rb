@@ -11,7 +11,11 @@ class Trebuchet::Feature
   end
   
   def self.all
-    Trebuchet.backend.get_features.map{|name| new(name)}
+    Trebuchet.backend.get_feature_names.map{|name| new(name)}
+  end
+  
+  def self.exist?(name)
+    !!all.detect{|feature| feature.name == name }
   end
 
   def strategy
