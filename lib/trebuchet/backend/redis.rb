@@ -3,8 +3,11 @@ require 'json'
 
 class Trebuchet::Backend::Redis
   
+  attr_accessor :namespace
+  
   def initialize(*args)
     @redis = Redis.new(*args)
+    @namespace = 'trebuchet/'
   end
 
   def get_strategy(feature_name)
@@ -25,14 +28,14 @@ class Trebuchet::Backend::Redis
     @redis.hset(key, feature_name, (s + [strategy, options]).to_json)
   end
   
-  def get_features
+  def get_feature_names
     @redis.hkeys(key)
   end
 
   private
 
   def key
-    'trebuchet/features'
+    '#{namespace}features'
   end
 
 end
