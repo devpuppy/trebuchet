@@ -14,13 +14,12 @@ class TrebuchetController < ApplicationController
   
   private
   def control_access
-    key = "trebuchet/#{params[:action]}"
-    if Trebuchet::Feature.exist?(key)
-      unless trebuchet.launch?(key)
-        raise ActionController::RoutingError.new('Not Found')
-      end
+    allowed = if Trebuchet.admin_view.is_a?(Proc)
+      Trebuchet.admin_view.call
+    else
+      !!Trebuchet.admin_view
     end
-    return true
+    raise ActionController::RoutingError.new('Not Found') unless allowed
   end
   
 end
