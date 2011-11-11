@@ -1,7 +1,7 @@
 require 'trebuchet'
 
 
-# happens too late
+# FIXME: happens too early
 def set_trebuchet_namespace(app_name)
   if Trebuchet.backend.respond_to?(:namespace=)
     Trebuchet.backend.namespace = "trebuchet-#{app_name}/"
