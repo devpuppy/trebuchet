@@ -1,6 +1,6 @@
 class Trebuchet
 
-  VERSION = "0.0.2"
+  VERSION = "0.0.3"
 
   class << self
     attr_accessor :admin_view, :admin_edit
