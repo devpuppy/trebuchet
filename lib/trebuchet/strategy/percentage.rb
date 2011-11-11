@@ -7,7 +7,7 @@ class Trebuchet::Strategy::Percentage < Trebuchet::Strategy::Base
   end
   
   def offset
-    @offset ||= if feature
+    if feature
       # arbitrary yet deterministic offset based on feature name to vary the test groups
       feature.name.hash % 100
     else
@@ -16,7 +16,7 @@ class Trebuchet::Strategy::Percentage < Trebuchet::Strategy::Base
   end
 
   def launch_at?(user)
-    (user.id + @offset) % 100 < percentage
+    (user.id + offset) % 100 < percentage
   end
 
 end
