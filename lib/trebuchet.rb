@@ -6,24 +6,16 @@ class Trebuchet
     attr_accessor :admin_view, :admin_edit
     
     def backend
-      @backend || (self.backend = :memory)
+      self.backend = :memory unless @backend
+      @backend
     end
     
     def backend=(args)
       args = Array(args)
       @backend = Backend.lookup(args.shift).new(*args)
     end
+    
   end
-
-  # def self.backend
-  #   self.backend = :memory unless defined? @@backend
-  #   @@backend
-  # end
-  # 
-  # def self.backend=(args)
-  #   args = Array(args)
-  #   @@backend = Backend.lookup(args.shift).new(*args)
-  # end
 
   def self.aim(feature_name, *args)
     Feature.find(feature_name).aim(*args)
