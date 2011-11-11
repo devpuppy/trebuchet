@@ -41,7 +41,7 @@ class Trebuchet::Backend::Redis
   end
   
   def feature_key(feature_name)
-    '#{namespace}features/#{feature_name}'
+    "#{namespace}features/#{feature_name}"
   end
 
 end
