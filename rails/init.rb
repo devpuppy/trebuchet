@@ -18,7 +18,7 @@ if defined? Rails
   else
     # Rails 2.x
     config ||= Rails.configuration if Rails.respond_to?(:configuration)
-    config.gem 'trebuchet' # load as engine even if loaded via bundler
+    # config.gem 'trebuchet' # load as engine even if loaded via bundler
     load_paths.each do |path|
        ActiveSupport::Dependencies.load_once_paths.delete(path)
     end if config.environment == 'development'
