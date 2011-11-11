@@ -2,14 +2,19 @@ class Trebuchet
 
   VERSION = "0.0.2"
 
-  def self.backend
-    self.backend = :memory unless defined? @@backend
-    @@backend
-  end
-
-  def self.backend=(args)
-    args = Array(args)
-    @@backend = Backend.lookup(args.shift).new(*args)
+  class << self
+    attr_accessor :admin_view, :admin_edit
+    
+    def backend
+      self.backend = :memory unless @backend
+      @backend
+    end
+    
+    def backend=(args)
+      args = Array(args)
+      @backend = Backend.lookup(args.shift).new(*args)
+    end
+    
   end
 
   def self.aim(feature_name, *args)
