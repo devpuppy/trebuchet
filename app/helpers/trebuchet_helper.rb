@@ -25,13 +25,23 @@ module TrebuchetHelper
   end
   
   def users_strategy(strategy)
-    "user ids: #{strategy.user_ids.to_a.join(', ')}"
+    user_ids = strategy.user_ids.to_a
+    str = "user ids: "
+    str << (user_ids.empty? ? 'none' : "#{user_ids.join(', ')}")
+    str
   end
   
   def percent_strategy(strategy)
-    low_id = 0.to_s.rjust(2, '0')
-    high_id = (strategy.percentage - 1).to_s.rjust(2, '0')
-    "#{strategy.percentage}% (user id ending with #{low_id}#{" to #{high_id}" if high_id != low_id})"
+    percent, offset = strategy.percentage, strategy.offset
+    low_id = (0 + offset).to_s.rjust(2, '0')
+    high_id = (percent + offset - 1).to_s.rjust(2, '0')
+    str = "#{percent}%"
+    unless percent == 0
+      str << " (user id ending with #{low_id}" 
+      str << " to #{high_id}" if high_id != low_id
+      str << ")"
+    end
+    str
   end
   
   def multiple_strategy(strategy)
