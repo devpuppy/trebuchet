@@ -10,10 +10,12 @@ class Trebuchet
       @backend
     end
     
-    def backend=(args)
-      args = Array(args)
-      @backend = Backend.lookup(args.shift).new(*args)
+    def set_backend(backend_type, *args)
+      @backend = Backend.lookup(backend_type).new(*args)
     end
+    
+    # this only works with additional args, e.g.: Trebuchet.backend = :memory
+    alias_method :backend=, :set_backend 
     
   end
 
