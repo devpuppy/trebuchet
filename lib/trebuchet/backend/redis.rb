@@ -6,7 +6,12 @@ class Trebuchet::Backend::Redis
   attr_accessor :namespace
   
   def initialize(*args)
-    @redis = Redis.new(*args)
+    if args.first.is_a?(Hash) && args.first[:client].is_a?(Redis)
+      # ignore other args and use provided Redis connection
+      @redis = args.first[:client]
+    else
+      @redis = Redis.new(*args)
+    end
     @namespace = 'trebuchet/'
   end
 
