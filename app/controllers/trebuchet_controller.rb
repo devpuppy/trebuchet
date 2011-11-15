@@ -15,7 +15,11 @@ class TrebuchetController < ApplicationController
   private
   def control_access
     allowed = if Trebuchet.admin_view.is_a?(Proc)
-      Trebuchet.admin_view.call
+      begin
+        instance_eval &(Trebuchet.admin_view)
+      rescue
+        false
+      end
     else
       !!Trebuchet.admin_view
     end
