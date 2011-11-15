@@ -8,9 +8,11 @@ Setup
 -----
 
 Trebuchet can be used with Rails or standalone.
-In a Rails initializer do:
 
-    Trebuchet.use_with_rails!
+Trebuchet defaults to storing data in memory, or can be used with Redis or Memcache as a data store:
+    
+    Trebuchet.set_backend :memcached
+    Trebuchet.set_backend :redis, :client => Redis.new(:host => 'example.com')
 
 
 Aim
