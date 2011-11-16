@@ -53,6 +53,7 @@ end
 
 require 'set'
 require 'trebuchet/backend'
+require 'trebuchet/backend/disabled'
 require 'trebuchet/backend/memory'
 require 'trebuchet/backend/memcached'
 require 'trebuchet/backend/redis'
