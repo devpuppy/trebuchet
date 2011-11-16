@@ -1,6 +1,6 @@
 class Trebuchet::Backend::Memory
 
-  def initialize
+  def initialize(*args)
     @hash = {}
   end
 
