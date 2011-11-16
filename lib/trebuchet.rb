@@ -52,6 +52,7 @@ end
 
 
 require 'set'
+require 'trebuchet/error'
 require 'trebuchet/backend'
 require 'trebuchet/backend/disabled'
 require 'trebuchet/backend/memory'
