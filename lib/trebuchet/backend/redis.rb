@@ -22,6 +22,7 @@ class Trebuchet::Backend::Redis
 
   def get_strategy(feature_name)
     return nil unless h = @redis.hgetall(feature_key(feature_name))
+    return nil unless h.is_a?(Hash)
     [].tap do |a|
       h.each do |k, v|
         a << k.to_sym
