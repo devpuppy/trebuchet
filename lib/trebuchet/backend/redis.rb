@@ -25,8 +25,14 @@ class Trebuchet::Backend::Redis
     return nil unless h.is_a?(Hash)
     [].tap do |a|
       h.each do |k, v|
-        a << k.to_sym
-        a << JSON.load(v).first # unpack from array
+        begin
+          key = k.to_sym
+          value = JSON.load(v).first # unpack from array
+          a << key
+          a << value
+        rescue
+          # if it can't parse the JSON, skip it
+        end
       end
     end
   end
