@@ -12,6 +12,11 @@ class Trebuchet::Backend::Redis
     else
       @redis = Redis.new(*args)
     end
+    begin
+      @redis.info # throw exception if not connected
+    rescue Exception => e
+      raise Trebuchet::BackendInitializationError, e.message
+    end
     @namespace = 'trebuchet/'
   end
 
