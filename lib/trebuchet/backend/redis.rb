@@ -6,18 +6,18 @@ class Trebuchet::Backend::Redis
   attr_accessor :namespace
   
   def initialize(*args)
-    if args.first.is_a?(Hash) && args.first[:client].is_a?(Redis)
-      # ignore other args and use provided Redis connection
-      @redis = args.first[:client]
-    else
-      @redis = Redis.new(*args)
-    end
+    @namespace = 'trebuchet/'
     begin
-      @redis.info # throw exception if not connected
+      if args.first.is_a?(Hash) && args.first[:client].is_a?(Redis)
+        # ignore other args and use provided Redis connection
+        @redis = args.first[:client]
+      else
+        @redis = Redis.new(*args)
+      end
+      @redis.info # raise error if not connected, don't trust @redis.client.connected?
     rescue Exception => e
       raise Trebuchet::BackendInitializationError, e.message
     end
-    @namespace = 'trebuchet/'
   end
 
   def get_strategy(feature_name)
