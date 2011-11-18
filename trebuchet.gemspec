@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'redis'
   s.add_runtime_dependency 'memcache'
+  s.add_runtime_dependency 'json'
   
   if s.respond_to? :specification_version then
     s.specification_version = 3
