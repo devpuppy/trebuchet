@@ -18,9 +18,9 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
 
-  s.add_runtime_dependency 'redis'
-  s.add_runtime_dependency 'memcache'
-  s.add_runtime_dependency 'json'
+  s.add_dependency 'redis'
+  s.add_dependency 'memcache'
+  s.add_dependency 'json'
   
   if s.respond_to? :specification_version then
     s.specification_version = 3
