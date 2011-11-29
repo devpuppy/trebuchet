@@ -56,8 +56,8 @@ require 'trebuchet/error'
 require 'trebuchet/backend'
 require 'trebuchet/backend/disabled'
 require 'trebuchet/backend/memory'
-require 'trebuchet/backend/memcached'
-require 'trebuchet/backend/redis'
+require 'trebuchet/backend/memcached' if defined?(Memcache)
+require 'trebuchet/backend/redis' if defined?(Redis)
 require 'trebuchet/feature'
 require 'trebuchet/strategy'
 require 'trebuchet/strategy/base'

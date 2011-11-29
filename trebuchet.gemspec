@@ -17,9 +17,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-
-  s.add_dependency 'redis'
-  s.add_dependency 'memcache'
+  # redis and memcache are optional
   s.add_dependency 'json'
   
   if s.respond_to? :specification_version then
