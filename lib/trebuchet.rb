@@ -11,6 +11,7 @@ class Trebuchet
     end
     
     def set_backend(backend_type, *args)
+      require "trebuchet/backend/#{backend_type}"
       @backend = Backend.lookup(backend_type).new(*args)
     end
     
@@ -55,9 +56,7 @@ require 'set'
 require 'trebuchet/error'
 require 'trebuchet/backend'
 require 'trebuchet/backend/disabled'
-require 'trebuchet/backend/memory'
-require 'trebuchet/backend/memcached' if defined?(Memcache)
-require 'trebuchet/backend/redis' if defined?(Redis)
+# load other backends on demand so their dependencies can load first
 require 'trebuchet/feature'
 require 'trebuchet/strategy'
 require 'trebuchet/strategy/base'
