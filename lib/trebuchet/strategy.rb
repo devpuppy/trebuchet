@@ -30,7 +30,7 @@ module Trebuchet::Strategy
       [:default, Default],
       [:custom, Custom],
       [:multiple, Multiple],
-      [:bucket, Bucket]
+      [:experiment, Experiment]
     ]
   end
   
