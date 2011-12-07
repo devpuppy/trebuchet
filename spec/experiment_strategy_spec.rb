@@ -85,5 +85,10 @@ describe Trebuchet::Strategy::Experiment do
     total_overlap = (launches[0] & launches[1] & launches[2])    
     (total_overlap.size * 100 / user_ids.size).round.should < 2
   end
+  
+  it "should return false for invalid parameters" do
+    Trebuchet.aim(@feature_name, :experiment, :name => @experiment_name, :bucket => 900)
+    Trebuchet.feature(@feature_name).strategy.should_not be_valid
+  end
    
 end
