@@ -89,6 +89,14 @@ describe Trebuchet::Strategy::Experiment do
   it "should return false for invalid parameters" do
     Trebuchet.aim(@feature_name, :experiment, :name => @experiment_name, :bucket => 900)
     Trebuchet.feature(@feature_name).strategy.should_not be_valid
+    Trebuchet.aim(@feature_name, :experiment, :name => @experiment_name, :bucket => 1, :total_buckets => -17)
+    Trebuchet.feature(@feature_name).strategy.should_not be_valid
+    Trebuchet.aim(@feature_name, :experiment, :name => @experiment_name, :bucket => 10, :total_buckets => 3)
+    Trebuchet.feature(@feature_name).strategy.should_not be_valid
+    Trebuchet.aim(@feature_name, :experiment, :name => @experiment_name)
+    Trebuchet.feature(@feature_name).strategy.should_not be_valid
+    Trebuchet.aim(@feature_name, :experiment, :bucket => 1)
+    Trebuchet.feature(@feature_name).strategy.should_not be_valid
   end
    
 end
