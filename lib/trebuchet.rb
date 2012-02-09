@@ -49,6 +49,8 @@ class Trebuchet
 
 end
 
+# FIXME: this makes the entire gem dependent on Rails 3
+require 'trebuchet/engine' 
 
 require 'set'
 require 'trebuchet/version'

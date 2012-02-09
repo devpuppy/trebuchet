@@ -10,7 +10,9 @@ require 'trebuchet'
 if defined? Rails
   Trebuchet.use_with_rails!
   
-  if Rails.respond_to?(:version) && Rails.version =~ /^3/
+  if Rails.respond_to?(:version) && Rails::VERSION::MAJOR == 3
+  
+    require 'trebuchet/engine'
     # Rails 3.x
     # no other setup needed  
   else
