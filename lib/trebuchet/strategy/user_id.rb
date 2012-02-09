@@ -6,7 +6,7 @@ class Trebuchet::Strategy::UserId < Trebuchet::Strategy::Base
     @user_ids = Set.new(user_ids)
   end
 
-  def launch_at?(user)
+  def launch_at?(user, request = nil)
     @user_ids.include?(user.id)
   end
   
