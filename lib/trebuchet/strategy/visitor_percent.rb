@@ -5,22 +5,20 @@ class Trebuchet::Strategy::VisitorPercent < Trebuchet::Strategy::Base
   def initialize(percent)
     @percent = percent
   end
-  
+
   def offset
     feature_id % 100
   end
 
   def launch_at?(user, request = nil)
-    session_id = request.respond_to?(:session_options) &&
-      request.session_options[:id]
-
-    if !session_id || session_id == ''
-      false
+    if Trebuchet.visitor_id_proc.respond_to?(:call)
+      visitor_id = Trebuchet.visitor_id_proc.call(request)
     else
-      session_id_int = session_id.hex
-      session_id_int > 0 &&
-        (session_id_int + offset) % 100 < percent
+      visitor_id = nil
     end
+
+    return false if visitor_id.nil?
+    (visitor_id + offset) % 100 < percent
   end
 
 end

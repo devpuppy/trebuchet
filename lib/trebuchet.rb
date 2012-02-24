@@ -26,6 +26,20 @@ class Trebuchet
     Strategy::Custom.define(name, block)
   end
 
+  def self.visitor_id=(id_or_proc)
+    if id_or_proc.is_a?(Proc)
+      @@visitor_proc = id_or_proc
+    elsif id_or_proc.is_a?(Integer)
+      @@visitor_proc = proc { |request| id_or_proc }
+    else
+      @@visitor_proc = nil
+    end
+  end
+
+  def self.visitor_id_proc
+    @@visitor_proc
+  end
+
   def self.feature(name)
     Feature.find(name)
   end
