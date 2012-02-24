@@ -2,6 +2,12 @@ require 'spec_helper'
 
 describe Trebuchet::Strategy::VisitorPercent do
 
+  it "should not break if no visitor id is set" do
+    Trebuchet.aim('some_feature', :visitor_percent, 100)
+    t = Trebuchet.new(User.new(0))
+    t.launch?('some_feature').should == false
+  end
+
   describe 'visitor id integer' do
     before do
       Trebuchet.visitor_id = 123

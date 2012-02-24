@@ -1,5 +1,7 @@
 class Trebuchet
 
+  @@visitor_proc = nil
+
   class << self
     attr_accessor :admin_view, :admin_edit
     
@@ -44,10 +46,6 @@ class Trebuchet
     Feature.find(name)
   end
 
-  def self.use_with_rails!
-    ::ActionController::Base.send(:include, Trebuchet::ActionController)
-  end
-
   def initialize(current_user, request = nil)
     @current_user = current_user
     @request = request
@@ -83,4 +81,5 @@ require 'trebuchet/strategy/custom'
 require 'trebuchet/strategy/invalid'
 require 'trebuchet/strategy/multiple'
 require 'trebuchet/strategy/visitor_percent'
-require 'trebuchet/action_controller'
+
+require 'trebuchet/railtie' if defined?(Rails)
