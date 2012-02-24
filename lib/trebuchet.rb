@@ -80,4 +80,5 @@ require 'trebuchet/strategy/invalid'
 require 'trebuchet/strategy/multiple'
 require 'trebuchet/strategy/visitor_percent'
 
-require 'trebuchet/rails' if defined?(Rails)
+# Load Rails engine/ActionController
+require 'trebuchet/rails'
