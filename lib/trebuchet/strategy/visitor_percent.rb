@@ -11,8 +11,8 @@ class Trebuchet::Strategy::VisitorPercent < Trebuchet::Strategy::Base
   end
 
   def launch_at?(user, request = nil)
-    if Trebuchet.visitor_id_proc.respond_to?(:call)
-      visitor_id = Trebuchet.visitor_id_proc.call(request)
+    if Trebuchet.visitor_id.respond_to?(:call)
+      visitor_id = Trebuchet.visitor_id.call(request)
     else
       visitor_id = nil
     end

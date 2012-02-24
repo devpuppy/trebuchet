@@ -1,6 +1,6 @@
 class Trebuchet
 
-  @@visitor_proc = nil
+  @@visitor_id = nil
 
   class << self
     attr_accessor :admin_view, :admin_edit
@@ -30,16 +30,16 @@ class Trebuchet
 
   def self.visitor_id=(id_or_proc)
     if id_or_proc.is_a?(Proc)
-      @@visitor_proc = id_or_proc
+      @@visitor_id = id_or_proc
     elsif id_or_proc.is_a?(Integer)
-      @@visitor_proc = proc { |request| id_or_proc }
+      @@visitor_id = proc { |request| id_or_proc }
     else
-      @@visitor_proc = nil
+      @@visitor_id = nil
     end
   end
 
-  def self.visitor_id_proc
-    @@visitor_proc
+  def self.visitor_id
+    @@visitor_id
   end
 
   def self.feature(name)
