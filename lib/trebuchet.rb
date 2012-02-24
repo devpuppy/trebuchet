@@ -81,4 +81,4 @@ require 'trebuchet/strategy/multiple'
 require 'trebuchet/strategy/visitor_percent'
 
 # Load Rails engine/ActionController
-require 'trebuchet/rails'
+require 'trebuchet/engine'
