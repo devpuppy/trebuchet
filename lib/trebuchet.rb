@@ -61,8 +61,6 @@ class Trebuchet
 
 end
 
-# FIXME: this makes the entire gem dependent on Rails 3
-require 'trebuchet/engine' 
 
 require 'set'
 require 'trebuchet/version'
@@ -82,4 +80,4 @@ require 'trebuchet/strategy/invalid'
 require 'trebuchet/strategy/multiple'
 require 'trebuchet/strategy/visitor_percent'
 
-require 'trebuchet/railtie' if defined?(Rails)
+require 'trebuchet/rails' if defined?(Rails)
