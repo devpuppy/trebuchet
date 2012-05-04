@@ -1,5 +1,7 @@
 class Trebuchet
 
+  @@visitor_id = nil
+
   class << self
     attr_accessor :admin_view, :admin_edit
     
@@ -26,12 +28,22 @@ class Trebuchet
     Strategy::Custom.define(name, block)
   end
 
-  def self.feature(name)
-    Feature.find(name)
+  def self.visitor_id=(id_or_proc)
+    if id_or_proc.is_a?(Proc)
+      @@visitor_id = id_or_proc
+    elsif id_or_proc.is_a?(Integer)
+      @@visitor_id = proc { |request| id_or_proc }
+    else
+      @@visitor_id = nil
+    end
   end
 
-  def self.use_with_rails!
-    ::ActionController::Base.send(:include, Trebuchet::ActionController)
+  def self.visitor_id
+    @@visitor_id
+  end
+
+  def self.feature(name)
+    Feature.find(name)
   end
 
   def initialize(current_user, request = nil)
@@ -49,8 +61,6 @@ class Trebuchet
 
 end
 
-# FIXME: this makes the entire gem dependent on Rails 3
-require 'trebuchet/engine' 
 
 require 'set'
 require 'trebuchet/version'
@@ -69,4 +79,6 @@ require 'trebuchet/strategy/custom'
 require 'trebuchet/strategy/invalid'
 require 'trebuchet/strategy/multiple'
 require 'trebuchet/strategy/visitor_percent'
-require 'trebuchet/action_controller'
+
+# Load Rails engine/ActionController
+require 'trebuchet/engine'
